@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back2"
+    tools:context=".Activity.HealthArticlesDetailsActivity">
+
+    <Button
+        android:id="@+id/buttonHADBack"
+        android:layout_width="111dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/btn_bg"
+        android:backgroundTint="@color/purpleDark"
+        android:text="@string/back"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewHAD" />
+
+    <TextView
+        android:id="@+id/textView_Title4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/_24x7_healthcare"
+        android:textColor="@color/teal_200"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/textViewHADTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/health_articles"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Title4" />
+
+    <ImageView
+        android:id="@+id/imageViewHAD"
+        android:layout_width="361dp"
+        android:layout_height="556dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/health_articles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHADTitle"
+        app:srcCompat="@drawable/health1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

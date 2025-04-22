@@ -1,0 +1,116 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Splash.Splash2">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:background="@drawable/aa"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/ellipse_3"
+        android:layout_width="291dp"
+        android:layout_height="291dp"
+        android:background="@drawable/circle_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386" />
+
+    <View
+        android:id="@+id/image_24"
+        android:layout_width="167dp"
+        android:layout_height="167dp"
+        android:background="@drawable/img_7"
+        app:layout_constraintBottom_toBottomOf="@+id/ellipse_3"
+        app:layout_constraintEnd_toEndOf="@+id/ellipse_3"
+        app:layout_constraintStart_toStartOf="@+id/ellipse_3"
+        app:layout_constraintTop_toTopOf="@+id/ellipse_3" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Your Doctor"
+        android:textColor="#1BCDD3"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/ellipse_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:id="@+id/subtitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Your Doctor"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <ImageView
+        android:id="@+id/skip"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/img_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <LinearLayout
+        android:id="@+id/loadingDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/subtitleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/dot_shape" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/dot_shape2" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/dot_shape2" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn"
+        android:layout_width="189dp"
+        android:layout_height="52dp"
+        android:text="Next"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:background="@drawable/aa2"
+        app:layout_constraintTop_toBottomOf="@+id/loadingDots"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
