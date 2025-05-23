@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "409676331957",
+    "project_id": "helthcare-ff181",
+    "storage_bucket": "helthcare-ff181.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409676331957:android:60bce57c435bac3e2a37fc",
+        "android_client_info": {
+          "package_name": "com.example.helthcare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgW1_dTs3Kza_haVqox2RKAbxfvzD1GsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

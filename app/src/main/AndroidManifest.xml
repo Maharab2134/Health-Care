@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.helthcare">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HelthCare"
+        tools:targetApi="31">
+        <activity
+            android:name=".Splash.Splash4"
+            android:exported="false" />
+        <activity
+            android:name=".Splash.Splash3"
+            android:exported="false" />
+        <activity
+            android:name=".Splash.Splash2"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.HealthArticlesDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.HealthArticlesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BuyMedicineBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BuyMedicineDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CartBuyMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BuyMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LabTestBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CartLabActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LabTestDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.LabTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DoctorDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.FindDoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BookAppointmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.OrderConfirmationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.ProfileActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
