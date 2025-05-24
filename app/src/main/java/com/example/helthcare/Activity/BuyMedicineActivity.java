@@ -1,7 +1,9 @@
 package com.example.helthcare.Activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -12,10 +14,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.helthcare.Database.FirebaseHelper;
 import com.example.helthcare.HomeActivity;
 import com.example.helthcare.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -110,6 +114,9 @@ public class BuyMedicineActivity extends AppCompatActivity {
     ListView lst;
     Button btnBack, btnGoToCart;
     TextView textViewODTitle;
+    private ArrayList<Integer> quantities;
+    private FirebaseHelper firebaseHelper;
+    private ArrayList<Boolean> selectedItems;
 
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -121,6 +128,9 @@ public class BuyMedicineActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.buttonBMBack);
         btnGoToCart = findViewById(R.id.buttonBMGoToCart);
         textViewODTitle = findViewById(R.id.textViewODTitle);
+        quantities = new ArrayList<>();
+        selectedItems = new ArrayList<>();
+        firebaseHelper = new FirebaseHelper(this);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -146,16 +156,33 @@ public class BuyMedicineActivity extends AppCompatActivity {
                     }
                 });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BuyMedicineActivity.this, HomeActivity.class));
+        btnBack.setOnClickListener(view -> startActivity(new Intent(BuyMedicineActivity.this, HomeActivity.class)));
+        
+        btnGoToCart.setOnClickListener(view -> {
+            // Get username from SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+            String username = sharedPreferences.getString("username", "");
+            
+            boolean hasSelectedItems = false;
+            
+            // Add selected items to cart
+            for (int i = 0; i < medicines.length; i++) {
+                if (selectedItems.get(i)) {
+                    hasSelectedItems = true;
+                    String priceStr = medicines[i][2].replace("৳", "").trim();
+                    double price = Double.parseDouble(priceStr);
+                    int quantity = quantities.get(i);
+                    double totalPrice = price * quantity;
+                    
+                    firebaseHelper.addCart(username, medicines[i][0], (float)totalPrice, "medicine");
+                }
             }
-        });
-        btnGoToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            
+            if (hasSelectedItems) {
+                Toast.makeText(BuyMedicineActivity.this, "Items added to cart", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(BuyMedicineActivity.this, CartBuyMedicineActivity.class));
+            } else {
+                Toast.makeText(BuyMedicineActivity.this, "Please select items to add to cart", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -168,6 +195,8 @@ public class BuyMedicineActivity extends AppCompatActivity {
             item.put("line4", medicines[i][3]);
             item.put("line5", medicines[i][4]);
             list.add(item);
+            quantities.add(1); // Initialize quantity as 1
+            selectedItems.add(false); // Initialize selection as false
         }
 
         sa = new SimpleAdapter(
@@ -176,7 +205,42 @@ public class BuyMedicineActivity extends AppCompatActivity {
                 R.layout.multi_lines_medicine,
                 new String[]{"line1", "line2", "line3", "line4", "line5"},
                 new int[]{R.id.line_a, R.id.line_b, R.id.line_c, R.id.line_d, R.id.line_e}
-        );
+        ) {
+            @Override
+            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                
+                Button btnMinus = view.findViewById(R.id.btnMinus);
+                Button btnPlus = view.findViewById(R.id.btnPlus);
+                TextView tvQuantity = view.findViewById(R.id.tvQuantity);
+                
+                tvQuantity.setText(String.valueOf(quantities.get(position)));
+                
+                btnMinus.setOnClickListener(v -> {
+                    int currentQty = quantities.get(position);
+                    if (currentQty > 1) {
+                        quantities.set(position, currentQty - 1);
+                        tvQuantity.setText(String.valueOf(currentQty - 1));
+                    }
+                });
+                
+                btnPlus.setOnClickListener(v -> {
+                    int currentQty = quantities.get(position);
+                    quantities.set(position, currentQty + 1);
+                    tvQuantity.setText(String.valueOf(currentQty + 1));
+                });
+
+                // Toggle selection when clicking on the item
+                view.setOnClickListener(v -> {
+                    selectedItems.set(position, !selectedItems.get(position));
+                    view.setBackgroundColor(selectedItems.get(position) ? 
+                        getResources().getColor(android.R.color.holo_blue_light) : 
+                        getResources().getColor(android.R.color.white));
+                });
+                
+                return view;
+            }
+        };
 
         lst.setAdapter(sa);
 
@@ -189,6 +253,7 @@ public class BuyMedicineActivity extends AppCompatActivity {
             it.putExtra("text5", medicine_details[i][3]);
             it.putExtra("text6", medicine_details[i][4]);
             it.putExtra("text7", medicines[i][2]);
+            it.putExtra("quantity", quantities.get(i));
             startActivity(it);
         });
     }

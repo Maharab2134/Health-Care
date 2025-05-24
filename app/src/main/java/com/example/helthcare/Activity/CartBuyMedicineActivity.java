@@ -86,13 +86,14 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
         btnBack.setOnClickListener(view -> startActivity(new Intent(CartBuyMedicineActivity.this, BuyMedicineActivity.class)));
 
         btnCheckout.setOnClickListener(view -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
-            String username = sharedPreferences.getString("username", "");
             String date = btnDate.getText().toString();
 
             if (date.equals("Select Date")) {
                 Toast.makeText(getApplicationContext(), "Please select delivery date", Toast.LENGTH_SHORT).show();
             } else {
+                SharedPreferences sharedPreferences = getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
+                String username = sharedPreferences.getString("username", "");
+
                 firebaseHelper.getCartData(username, "medicine", task -> {
                     if (task.isSuccessful()) {
                         float totalAmount = 0;
@@ -121,21 +122,20 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
         firebaseHelper.getCartData(username, "medicine", task -> {
             if (task.isSuccessful()) {
                 float totalAmount = 0;
+                list = new ArrayList();
+                
                 for (DocumentSnapshot document : task.getResult()) {
                     totalAmount += document.getDouble("price");
-                }
-
-                tvTotalCost.setText("Total Cost : " + totalAmount);
-
-                list = new ArrayList();
-                for (DocumentSnapshot document : task.getResult()) {
+                    
                     item = new HashMap<>();
                     item.put("line1", document.getString("product"));
                     item.put("line2", "Price: " + document.getDouble("price"));
                     list.add(item);
                 }
 
-                sa = new SimpleAdapter(this, list, R.layout.multi_lines_medicine,
+                tvTotalCost.setText("Total Cost : " + totalAmount);
+
+                sa = new SimpleAdapter(this, list, R.layout.multi_lines_medicine_cart,
                         new String[]{"line1", "line2"},
                         new int[]{R.id.line_a, R.id.line_b});
                 lst.setAdapter(sa);
@@ -161,5 +161,4 @@ public class CartBuyMedicineActivity extends AppCompatActivity {
     private String makeDateString(int day, int month, int year) {
         return day + "/" + month + "/" + year;
     }
-
 }
